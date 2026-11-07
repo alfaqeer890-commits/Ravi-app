@@ -112,6 +112,11 @@ export default defineConfig(({ command, isPreview }) => ({
     port: 8081,
     strictPort: true,
   },
+  build: {
+    rollupOptions: {
+      external: ["../db"],
+    },
+  },
   resolve: { tsconfigPaths: true },
   plugins: [
     pgliteBootstrapPlugin(),
