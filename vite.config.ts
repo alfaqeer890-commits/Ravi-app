@@ -114,7 +114,7 @@ export default defineConfig(({ command, isPreview }) => ({
   },
   build: {
     rollupOptions: {
-      external: ["../db"],
+      external: ["../db", "../env.server.ts"],
     },
   },
   resolve: { tsconfigPaths: true },
