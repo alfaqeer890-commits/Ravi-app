@@ -78,7 +78,7 @@ function authPopupPlugin(): Plugin {
           const requestHeaders = new Headers();
           for (const [key, value] of Object.entries(req.headers)) {
             if (value === undefined) continue;
-            if (Array.isArray(value)) {
+            if Array.isArray(value) {
               for (const v of value) requestHeaders.append(key, v);
             } else {
               requestHeaders.set(key, value);
@@ -138,6 +138,11 @@ export default defineConfig(({ command, isPreview }) => ({
     port: 8081,
     strictPort: true,
   },
+  build: {
+    rollupOptions: {
+      external: ["../db"],
+    },
+  },
   resolve: { tsconfigPaths: true },
   plugins: [
     pgliteBootstrapPlugin(),
@@ -150,6 +155,10 @@ export default defineConfig(({ command, isPreview }) => ({
           nitro({
             preset: "vercel",
             serverDir: "./server",
+            externals: {
+              inline: [],
+              external: ["../db"],
+            },
           }),
         ]
       : []),
